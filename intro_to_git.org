@@ -1,0 +1,81 @@
+#+TITLE: Introduction to git
+
+* What is git?
+It is a distributed version control system
+* Happens far too often
+[[./phd101212s.png]]
+* Basic commands
+** git config
+   Necessary to tell other users who updated the code
+   git config --global user.name "Suyash Bire"
+   git config --global user.email "suyash.bire@stonybrook.edu"
+   git config --global core.editor "vim"
+** git init
+   Makes the current folder a git repository
+   Works by creating a .git folder
+** git status
+   Gives you an overview of your git repository
+** git log
+   Shows you a log of all git commits
+
+* Staging files
+  - Stage files by using:
+    git add filename
+  - Files can be ignored by adding them to .gitignore
+  - Undo a staging of a file by using:
+    git reset filename
+  - Undo changes before staging by:
+    git checkout filename
+
+* Commiting staged files
+  - Commit staged changes using:
+    git commit -m "commit message"
+  - Commit message should briefly describe the changes being made
+  - Two methods to undo a commit:
+    git revert (creates a new commit undoing the changes)
+    git reset (removes the commit)
+
+* Branching
+  - Always work on a branch when creating major changes
+  - See current branch and list of branches by:
+    git branch
+  - Create a new branch using:
+    git branch branchname
+  - Switch to new branch using:
+    git checkout branchname
+
+* Merging
+  - Switch to the branch you want to merge into
+  - Assume we want to merge branch2 into branch1
+  - Switch to branch1:
+    git checkout branch1
+  - Merge branch2 using:
+    git merge branch2
+  - If both branches have changes at the same location, you'll have a conflict.
+  - Check git status to see which files are conflicted
+  - Open a conflicted file and find conflicted areas demarcated by '>>>>>>', '======', and '<<<<<<'
+  - Manually choose the changes you want to keep, delete the rest and commit
+  - This fixes the conflict
+
+* Pushing to a remote location
+  - Most popular remote hosting providers are Github (free, closed source) and Gitlab (free and open source)
+  - Check your repository's remote locations using:
+    git remote -v
+  - Set a remote using:
+    git remote add remotename location
+  - Push to the remote by:
+    git push remotename
+  - If you plan to push frequently to remote location, use SSH method, else use HTML method (note that SSH method requires setting up SSH keys as described here https://help.github.com/articles/connecting-to-github-with-ssh/)
+
+* Syncing with remote
+  - See if changes have been made to remote
+    git fetch; git status
+  - Pull changes from remote
+    git pull remotename branch
+
+* Working with others' repositories
+  - If you don't plan to contribute, just clone a remote repo using:
+    git clone repository-address localfolder
+  - If you plan to contribute, create a fork first.
+  - Fork creates a copy of someone else's repository to your account, so that you can push to it
+  - You can then merge your changes with the upstream repository by creating a pull request
