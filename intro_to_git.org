@@ -83,7 +83,7 @@ git merge branch2
 - If both branches have changes at the same location, you'll have a conflict. How to resolve:
   1. Check git status to see which files are conflicted
   2. Open a conflicted file and find conflicted areas demarcated by '>>>>>>', '======', and '<<<<<<'
-  3. Manually choose the changes you want to keep, delete the rest, and commit
+  3. Manually choose the change you want to keep, delete the rest, and commit
   4. This fixes the conflict
 
 * Pushing to a remote location
