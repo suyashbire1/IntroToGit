@@ -2,80 +2,122 @@
 
 * What is git?
 It is a distributed version control system
-* Happens far too often
+* This can be avoided using git
 [[./phd101212s.png]]
 * Basic commands
-** git config
-   Necessary to tell other users who updated the code
-   git config --global user.name "Suyash Bire"
-   git config --global user.email "suyash.bire@stonybrook.edu"
-   git config --global core.editor "vim"
-** git init
-   Makes the current folder a git repository
-   Works by creating a .git folder
-** git status
-   Gives you an overview of your git repository
-** git log
-   Shows you a log of all git commits
+- Necessary to tell other users who updated the code:
+#+BEGIN_SRC shell
+git config --global user.name "Your name"
+git config --global user.email "your email"
+#+END_SRC
+- Change editor that git uses:
+#+BEGIN_SRC shell
+git config --global core.editor "vim"
+#+END_SRC
+- Make the current folder a git repository (works by creating a .git folder):
+#+BEGIN_SRC shell
+git init
+#+END_SRC
+- Gives an overview of the git repository:
+#+BEGIN_SRC shell
+git status
+#+END_SRC
+- Show a log of all git commits:
+#+BEGIN_SRC shell
+git log
+#+END_SRC
 
 * Staging files
-  - Stage files by using:
-    git add filename
-  - Files can be ignored by adding them to .gitignore
-  - Undo a staging of a file by using:
-    git reset filename
-  - Undo changes before staging by:
-    git checkout filename
+- Stage files:
+#+BEGIN_SRC shell
+git add <filename>
+#+END_SRC
+- Files can be ignored by adding them to .gitignore
+- Undo a staging of a file:
+#+BEGIN_SRC shell
+git reset <filename>
+#+END_SRC
+- Undo changes before staging:
+#+BEGIN_SRC shell
+git checkout <filename>
+#+END_SRC
 
 * Commiting staged files
-  - Commit staged changes using:
-    git commit -m "commit message"
-  - Commit message should briefly describe the changes being made
-  - Two methods to undo a commit:
-    git revert (creates a new commit undoing the changes)
-    git reset (removes the commit)
-
+- Commit staged changes:
+#+BEGIN_SRC shell
+git commit -m "commit message"
+#+END_SRC
+- If -m is dropped, git invokes an editor to edit the message
+- Commit message should briefly describe the changes being made
+- Two methods to undo a commit (commit-hash can be found using git log):
+#+BEGIN_SRC shell
+git revert <commit-hash>
+git reset <commit-hash>
+#+END_SRC
+- First creates a new commit undoing the changes
+- Second removes the commit
 * Branching
-  - Always work on a branch when creating major changes
-  - See current branch and list of branches by:
-    git branch
-  - Create a new branch using:
-    git branch branchname
-  - Switch to new branch using:
-    git checkout branchname
+- Always work on a branch when introducing major changes
+- See current branch and list of branches:
+#+BEGIN_SRC shell
+git branch
+#+END_SRC
+- Create a new branch:
+#+BEGIN_SRC shell
+git branch <branchname>
+#+END_SRC
+- Switch to new branch:
+#+BEGIN_SRC shell
+git checkout <branchname>
+#+END_SRC
 
 * Merging
-  - Switch to the branch you want to merge into
-  - Assume we want to merge branch2 into branch1
-  - Switch to branch1:
-    git checkout branch1
-  - Merge branch2 using:
-    git merge branch2
-  - If both branches have changes at the same location, you'll have a conflict.
-  - Check git status to see which files are conflicted
-  - Open a conflicted file and find conflicted areas demarcated by '>>>>>>', '======', and '<<<<<<'
-  - Manually choose the changes you want to keep, delete the rest and commit
-  - This fixes the conflict
+- Switch to the branch you want to merge into
+- Assume we want to merge branch2 into branch1
+  1. First switch to branch1
+  2. Then merge branch2
+#+BEGIN_SRC shell
+git checkout branch1
+git merge branch2
+#+END_SRC
+- If both branches have changes at the same location, you'll have a conflict. How to resolve:
+  1. Check git status to see which files are conflicted
+  2. Open a conflicted file and find conflicted areas demarcated by '>>>>>>', '======', and '<<<<<<'
+  3. Manually choose the changes you want to keep, delete the rest, and commit
+  4. This fixes the conflict
 
 * Pushing to a remote location
-  - Most popular remote hosting providers are Github (free, closed source) and Gitlab (free and open source)
-  - Check your repository's remote locations using:
-    git remote -v
-  - Set a remote using:
-    git remote add remotename location
-  - Push to the remote by:
-    git push remotename
-  - If you plan to push frequently to remote location, use SSH method, else use HTML method (note that SSH method requires setting up SSH keys as described here https://help.github.com/articles/connecting-to-github-with-ssh/)
+- Most popular remote hosting providers are Github (free, closed source) and Gitlab (free and open source)
+- Check your repository's remote locations:
+#+BEGIN_SRC shell
+git remote -v
+#+END_SRC
+- If no remote is set, add a remote (repository-address can be found from Github, Gitlab, etc, remotename can be anything):
+#+BEGIN_SRC shell
+git remote add <remotename> <repository-address>
+#+END_SRC
+- Push to the remote:
+#+BEGIN_SRC shell
+git push <remotename>
+#+END_SRC
+- If you plan to push frequently to remote location, use SSH method, else use HTML method (note that SSH method requires setting up SSH keys as described here https://help.github.com/articles/connecting-to-github-with-ssh/)
 
 * Syncing with remote
-  - See if changes have been made to remote
-    git fetch; git status
-  - Pull changes from remote
-    git pull remotename branch
+- See if changes have been made to remote:
+#+BEGIN_SRC shell
+git fetch; git status
+#+END_SRC
+- Pull changes from remoter:
+#+BEGIN_SRC shell
+git pull <remotename> <branchname>
+#+END_SRC
 
 * Working with others' repositories
-  - If you don't plan to contribute, just clone a remote repo using:
-    git clone repository-address localfolder
-  - If you plan to contribute, create a fork first.
-  - Fork creates a copy of someone else's repository to your account, so that you can push to it
-  - You can then merge your changes with the upstream repository by creating a pull request
+- If you don't plan to contribute, just clone a remote repo:
+#+BEGIN_SRC shell
+git clone <repository-address> <localfolder>
+#+END_SRC
+- If you plan to contribute
+  1. Create a fork first (fork creates a copy of someone else's repository into your account)
+  2. Clone your fork and work on it
+  3. Create a pull request to merge changes from your fork into the upstream repo
