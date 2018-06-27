@@ -57,7 +57,7 @@ git reset <commit-hash>
 - First creates a new commit undoing the changes
 - Second removes the commit
 * Branching
-- Always work on a branch when introducing major changes
+- Always work on a branch when introducing big changes
 - See current branch and list of branches:
 #+BEGIN_SRC shell
 git branch
